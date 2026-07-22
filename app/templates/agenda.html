@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Agenda Médica{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/tabulator/tabulator.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+{% block content %}
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">+</span>
+        <span class="brand-name">Agenda Médica</span>
+      </div>
+      <div class="topbar-user">
+        <span class="user-chip">{{ session['username'] }}</span>
+        <form method="post" action="{{ url_for('auth.logout') }}">
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+          <button type="submit" class="btn btn-ghost">Sair</button>
+        </form>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="page-head">
+        <h1>Agendamentos</h1>
+        <p class="subtitle">Consulte, busque e filtre os agendamentos médicos.</p>
+      </div>
+
+      <div id="aviso" class="aviso" role="status" hidden></div>
+
+      <section class="card">
+        <div class="toolbar">
+          <label class="search">
+            <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+              <path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    d="M21 21l-4.3-4.3M11 18a7 7 0 100-14 7 7 0 000 14z"/>
+            </svg>
+            <input id="busca" type="search" autocomplete="off"
+                   placeholder="Buscar por paciente, CPF ou médico...">
+          </label>
+          <select id="filtro-status" class="select" aria-label="Filtrar por status">
+            <option value="">Todos os status</option>
+          </select>
+        </div>
+        <div id="tabela" data-endpoint="{{ url_for('agenda.api_agendamentos') }}"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="{{ url_for('static', filename='vendor/tabulator/tabulator.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/agenda.js') }}"></script>
+{% endblock %}

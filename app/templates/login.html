@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Login - Agenda Medica{% endblock %}
+{% block head %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+{% endblock %}
+{% block content %}
+  <main class="login">
+    <div class="login-card">
+      <div class="login-brand">
+        <span class="brand-mark">+</span>
+        <span class="brand-name">Agenda Medica</span>
+      </div>
+      <p class="login-subtitle">Entre para consultar os agendamentos.</p>
+      <form method="post" action="{{ url_for('auth.login') }}" novalidate>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+        <label class="field">
+          <span>Usuario ou e-mail</span>
+          <input type="text" name="login" value="{{ login|default('', true) }}" autofocus required>
+        </label>
+        <label class="field">
+          <span>Senha</span>
+          <input type="password" name="senha" required>
+        </label>
+        <button type="submit" class="btn btn-primary">Entrar</button>
+      </form>
+    </div>
+  </main>
+{% endblock %}

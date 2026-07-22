@@ -1,0 +1,24 @@
+services:
+  web:
+    build: .
+    # Sobe sem passo manual: cria/inicializa o banco e o usuario de teste (idempotente) e serve a app.
+    command: sh -c "python seed.py && gunicorn --bind 0.0.0.0:5000 --workers 2 run:app"
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    environment:
+      - FLASK_ENV=production
+      - AGENDAMENTOS_API_URL=http://mock_api:5001/agendamentos
+    volumes:
+      - sqlite_data:/app/instance
+    depends_on:
+      - mock_api
+
+  mock_api:
+    build: ./mock_api
+    ports:
+      - "5001:5001"
+
+volumes:
+  sqlite_data:

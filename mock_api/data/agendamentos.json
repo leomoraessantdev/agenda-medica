@@ -1,0 +1,22 @@
+[
+  {
+    "paciente": "Maria Silva",
+    "cpf": "123.456.789-00",
+    "medico": "Dr. Joao Souza",
+    "especialidade": "Cardiologia",
+    "data": "2026-07-24",
+    "horario": "09:00",
+    "convenio": "Unimed",
+    "status": "Confirmado"
+  },
+  {
+    "paciente": "Carlos Pereira",
+    "cpf": "987.654.321-00",
+    "medico": "Dra. Ana Lima",
+    "especialidade": "Dermatologia",
+    "data": "2026-07-24",
+    "horario": "10:30",
+    "convenio": "Bradesco Saude",
+    "status": "Pendente"
+  }
+]
